@@ -5,10 +5,13 @@
   "author": "Ryan Yogan <ryanyogan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon --exec babel-node src/index.js"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^9.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
     "eslint": "^5.5.0",
     "eslint-config-equimper": "^2.2.2",
     "eslint-config-prettier": "^3.0.1",
