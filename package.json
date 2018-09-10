@@ -1,0 +1,20 @@
+{
+  "name": "gql-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ryan Yogan <ryanyogan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-equimper": "^2.2.2",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-jest": "^21.22.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "nodemon": "^1.18.4",
+    "prettier": "^1.14.2"
+  }
+}
