@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import uuidv4 from 'uuid/v4';
 import { ApolloServer, gql } from 'apollo-server-express';
 
 const app = express();
@@ -27,6 +28,11 @@ const schema = gql`
     userId: ID!
     user: User!
   }
+
+  type Mutation {
+    createMessage(text: String!): Message!
+    deleteMessage(id: ID!): Boolean!
+  }
 `;
 
 const users = {
@@ -42,7 +48,7 @@ const users = {
   },
 };
 
-const messages = {
+let messages = {
   1: {
     id: '1',
     text: 'Hello World',
@@ -69,6 +75,34 @@ const resolvers = {
   },
   Message: {
     user: message => users[message.userId],
+  },
+
+  Mutation: {
+    createMessage: (parent, { text }, { me }) => {
+      const id = uuidv4();
+
+      const message = {
+        id,
+        text,
+        userId: me.id,
+      };
+
+      messages[id] = message;
+      users[me.id].messageIds.push(id);
+
+      return message;
+    },
+    deleteMessage: (parent, { id }) => {
+      const { [id]: message, ...otherMessages } = messages;
+
+      if (!message) {
+        return false;
+      }
+
+      messages = otherMessages;
+
+      return true;
+    },
   },
 };
 
